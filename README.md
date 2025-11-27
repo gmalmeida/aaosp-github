@@ -18,6 +18,8 @@ repo init -u https://android.googlesource.com/platform/manifest -b android-15.0.
 # --fetch-submodules pulls in any git submodules
 # --force-sync cleans up mismatches
 repo sync -j$(nproc) -c --fetch-submodules --force-sync
+# if you get the message "Resource has been exhausted (e.g. check quota)", you can reduce the number of jobs
+repo sync -j4 -c --fetch-submodules --force-sync
 
 # --- Step 4: Set up the build environment
 source build/envsetup.sh
