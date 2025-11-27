@@ -41,8 +41,12 @@ source build/envsetup.sh
 # sdk_car_portrait_x86_64-trunk_staging-userdebug	x86_64	SDK build for portrait orientation; useful for vertical screen layouts (common in some EV dashboards)
 # sdk_car_x86_64-trunk_staging-userdebug	x86_64	Standard SDK build for x86_64; most common choice for emulator testing on desktop
 
+export TARGET_RELEASE=ap2a
+build_build_var_cache
+lunch
+# OR ALTERNATIVE
 # Example: build the x86_64 SDK car emulator image
-lunch sdk_car_x86_64-trunk_staging-userdebug
+# lunch sdk_car_x86_64-trunk_staging-userdebug
 # lunch is a helper script provided by the Android build system (build/envsetup.sh).
 # It sets up environment variables for the build, telling the system:
 # Which product/device configuration to build (here: sdk_car_x86_64-trunk_staging).
