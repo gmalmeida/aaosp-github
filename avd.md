@@ -12,6 +12,7 @@ cp out/target/product/emulator_car64_x86_64/system.img \
    $ANDROID_SDK_ROOT/system-images/android-35/android-automotive/x86_64/
 ```
 Add metadata files (sources.properties and package.xml (under the above directory) describing the image (API level 35, tag android-automotive, ABI x86_64). Example sources.properties:
+
 `sources.properties`
 ```
 Pkg.Desc=Android Automotive OS (local build)
@@ -22,7 +23,7 @@ SystemImage.TagId=android-automotive
 SystemImage.TagDisplay=Android Automotive
 ```
 `package.xml`
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <ns2:repository xmlns:ns2="http://www.android.com/repository"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
