@@ -1,3 +1,28 @@
+If you want to use your AAOS build output (out/target/product/emulator_car64_x86_64/), you need to package it into the SDK system-images layout so avdmanager can see it:
+```bash
+mkdir -p $ANDROID_SDK_ROOT/system-images/android-35/android-automotive/x86_64
+```
+Copy your built images:
+```bash
+cp out/target/product/emulator_car64_x86_64/system.img \
+   out/target/product/emulator_car64_x86_64/vendor.img \
+   out/target/product/emulator_car64_x86_64/product.img \
+   out/target/product/emulator_car64_x86_64/ramdisk.img \
+   out/target/product/emulator_car64_x86_64/vbmeta.img \
+   $ANDROID_SDK_ROOT/system-images/android-35/android-automotive/x86_64/
+```
+Add metadata files (sources.properties and package.xml) describing the image (API level 35, tag android-automotive, ABI x86_64). Example sources.properties:
+```
+Pkg.Desc=Android Automotive OS (local build)
+Pkg.Revision=1
+AndroidVersion.ApiLevel=35
+SystemImage.Abi=x86_64
+SystemImage.TagId=android-automotive
+SystemImage.TagDisplay=Android Automotive
+```
+Now avdmanager will recognize system-images;android-35;android-automotive;x86_64.
+
+
 # Create a car AVD via avdmanager
 Create the AVD:
 
