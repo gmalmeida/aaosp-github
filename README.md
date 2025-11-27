@@ -1,6 +1,8 @@
 # General 
 This repo intends to capture tips and tricks for building AAOS (vanila) 
 
+Source: https://source.android.com/docs/setup/download
+
 # Introductions
 
 ```bash
