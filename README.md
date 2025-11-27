@@ -6,7 +6,7 @@ This repo intends to capture tips and tricks for building AAOS (vanila)
 ```bash
 # --- Step 1: Create a fresh working directory
 # (Keeps AAOS sources separate from other AOSP checkouts)
-mkdir -p ~/aaos-15 && cd ~/aaos-15
+mkdir -p aaos-15 && cd aaos-15
 
 # --- Step 2: Initialize repo with Android 15 manifest
 # Replace android-15.0.0_r1 with the exact release tag you want
