@@ -61,7 +61,7 @@
 ## Key Deliverables
 
 ### Infotainment (Tier 1 OEM)
-**Customer:** ???
+**Customer:** Bosch
 
 - Welcome Sequence Support
 - Start-up Support
@@ -71,7 +71,7 @@
 - Audio, VR and Bluetooth/WiFi Support
 
 ### Android Automotive Architecture (French OEM)
-**Customer:** ???
+**Customer:** Renault
 
 - GAS/CDD requirement analysis and compliance reporting
 - XTS support and modification
@@ -80,7 +80,7 @@
 - Solutioning for various App and Services design and developments
 
 ### Cybersecurity Assessment & Access Policies (US OEM)
-**Customer:** ???
+**Customer:** FCA (Stellantis)
 
 - Development of baseline list of existing OEM IVI ecosystem API resources
 - Root-level privilege access control policies
@@ -122,7 +122,7 @@
 # Reference 7. OEM - Connected Apps: Transforming Infotainment into Smartphone Experience
 
 **Timeline:** 4+ years
-**Customer:** ???
+**Customer:** VW (Havai)
 
 ## Onboard Applications
 - Simpletainment
@@ -143,6 +143,9 @@
 ## Highlights
 - Apps integrated directly into car infotainment system
 - Backbone for add-on services: parking assistance, entertainment, location tracking, fleet management, ride assistance
+
+# Reference 9. Trucks OEM
+**Customer:** Volvo Trucks
 
 # Reference 10. Automotive Audio Amplifier Tier-1
 
