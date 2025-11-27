@@ -65,14 +65,9 @@ $ANDROID_SDK_ROOT/emulator/emulator \
   -gpu host \
   -no-snapshot \
   -no-boot-anim \
-  -partition-size 2048 \
-  -qemu -enable-kvm \
-  -writable-system \
-  -system out/target/product/emulator_car64_x86_64/system.img \
-  -vendor out/target/product/emulator_car64_x86_64/vendor.img \
-  -product out/target/product/emulator_car64_x86_64/product.img \
-  -ramdisk out/target/product/emulator_car64_x86_64/ramdisk.img \
-  -vbmeta out/target/product/emulator_car64_x86_64/vbmeta.img
+  -system /home/gabriel/playground/aaos-15/out/target/product/emulator_car64_x86_64/system.img \
+  -vendor /home/gabriel/playground/aaos-15/out/target/product/emulator_car64_x86_64/vendor.img \
+  -ramdisk /home/gabriel/playground/aaos-15/out/target/product/emulator_car64_x86_64/ramdisk.img
 ```
 
 # Quick sanity checks
