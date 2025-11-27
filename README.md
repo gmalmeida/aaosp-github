@@ -43,6 +43,10 @@ source build/envsetup.sh
 
 # Example: build the x86_64 SDK car emulator image
 lunch sdk_car_x86_64-trunk_staging-userdebug
+# lunch is a helper script provided by the Android build system (build/envsetup.sh).
+# It sets up environment variables for the build, telling the system:
+# Which product/device configuration to build (here: sdk_car_x86_64-trunk_staging).
+# Which build variant to use (here: userdebug).
 
 # --- Step 6: Build the system
 # "m" builds everything; -j$(nproc) uses all cores
