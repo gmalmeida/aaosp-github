@@ -31,6 +31,14 @@ source build/envsetup.sh
 #   sdk_car_portrait_x86_64-trunk_staging-userdebug
 #   sdk_car_x86_64-trunk_staging-userdebug
 #
+# Target	Architecture	Form Factor / Notes
+# gsi_car_arm64-trunk_staging-userdebug	ARM64	Generic System Image (GSI) for ARM64 devices; staging branch; good for testing AAOS on ARM hardware
+# gsi_car_x86_64-trunk_staging-userdebug	x86_64	GSI for x86_64 devices; staging branch; useful for emulators or Intel-based dev boards
+# sdk_car_arm64-trunk_staging-userdebug	ARM64	SDK build for ARM64; includes dev tools; good if you’re targeting ARM-based automotive hardware
+# sdk_car_md_x86_64-trunk_staging-userdebug	x86_64	SDK build for multi-display (md) setups; useful for testing AAOS with multiple screens
+# sdk_car_portrait_x86_64-trunk_staging-userdebug	x86_64	SDK build for portrait orientation; useful for vertical screen layouts (common in some EV dashboards)
+# sdk_car_x86_64-trunk_staging-userdebug	x86_64	Standard SDK build for x86_64; most common choice for emulator testing on desktop
+
 # Example: build the x86_64 SDK car emulator image
 lunch sdk_car_x86_64-trunk_staging-userdebug
 
