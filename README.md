@@ -66,7 +66,7 @@ m vendorimage
 m bootimage
 
 #Artifacts will appear under:
-out/target/product/sdk_car_x86_64/
+out/target/product/emulator_car64_x86_64/
 
 
 
