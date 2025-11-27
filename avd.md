@@ -43,6 +43,19 @@ SystemImage.TagDisplay=Android Automotive
 
 Now avdmanager will recognize system-images;android-35;android-automotive;x86_64.
 
+```console
+gabriel@android:~/android-sdk/system-images/android-35/android-automotive/x86_64$ ll
+total 1595536
+drwxrwxr-x 2 gabriel gabriel       4096 Nov 27 14:36 ./
+drwxrwxr-x 3 gabriel gabriel       4096 Nov 27 14:31 ../
+-rw-rw-r-- 1 gabriel gabriel        547 Nov 27 14:36 package.xml
+-rw-rw-r-- 1 gabriel gabriel  290586624 Nov 27 14:32 product.img
+-rw-rw-r-- 1 gabriel gabriel    2065247 Nov 27 14:32 ramdisk.img
+-rw-rw-r-- 1 gabriel gabriel        189 Nov 27 14:36 sources.properties
+-rw-rw-r-- 1 gabriel gabriel 1224155136 Nov 27 14:32 system.img
+-rw-rw-r-- 1 gabriel gabriel       8192 Nov 27 14:32 vbmeta.img
+-rw-rw-r-- 1 gabriel gabriel  118202368 Nov 27 14:32 vendor.img
+```
 
 # Create a car AVD via avdmanager
 Create the AVD:
