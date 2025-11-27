@@ -3,7 +3,7 @@ Create the AVD:
 
 ```bash
 AVD_NAME="aaos-car-x86_64-local"
-$SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd \
+$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd \
   --name "$AVD_NAME" \
   --device "Automotive" \
   --package "system-images;android-35;android-automotive;x86_64" \
@@ -12,7 +12,7 @@ $SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd \
 If “Automotive” device profile is missing, you can create with a generic profile and edit later:
 
 ```bash
-$SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd \
+$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd \
   --name "$AVD_NAME" \
   --package "system-images;android-35;android-automotive;x86_64" \
   --abi "x86_64"
