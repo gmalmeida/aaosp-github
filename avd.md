@@ -11,7 +11,8 @@ cp out/target/product/emulator_car64_x86_64/system.img \
    out/target/product/emulator_car64_x86_64/vbmeta.img \
    $ANDROID_SDK_ROOT/system-images/android-35/android-automotive/x86_64/
 ```
-Add metadata files (sources.properties and package.xml) describing the image (API level 35, tag android-automotive, ABI x86_64). Example sources.properties:
+Add metadata files (sources.properties and package.xml (under the above directory) describing the image (API level 35, tag android-automotive, ABI x86_64). Example sources.properties:
+`sources.properties`
 ```
 Pkg.Desc=Android Automotive OS (local build)
 Pkg.Revision=1
@@ -20,6 +21,25 @@ SystemImage.Abi=x86_64
 SystemImage.TagId=android-automotive
 SystemImage.TagDisplay=Android Automotive
 ```
+`package.xml`
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:repository xmlns:ns2="http://www.android.com/repository"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <localPackage path="system-images;android-35;android-automotive;x86_64" version="1">
+    <type-details xsi:type="ns2:sysImgDetailsType">
+      <apiLevel>35</apiLevel>
+      <tag>
+        <id>android-automotive</id>
+        <display>Android Automotive</display>
+      </tag>
+      <abi>x86_64</abi>
+    </type-details>
+    <channelRef ref="stable"/>
+  </localPackage>
+</ns2:repository>
+```
+
 Now avdmanager will recognize system-images;android-35;android-automotive;x86_64.
 
 
