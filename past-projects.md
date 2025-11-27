@@ -1,3 +1,19 @@
+# Overview
+
+# Project Overview Table
+
+| Reference | Project Name                                      | Customer      | Timeline                | Key Focus                                         | Team Size / FTE |
+|-----------|---------------------------------------------------|--------------|-------------------------|---------------------------------------------------|------------------|
+| 1         | Android Automotive Infotainment Development - System and Apps | Polstar       | Since 2024 (Launch planned for 2025) | System Applications, UI Components, Emulator... | **35** expert team |
+| 2         | NEXT-GEN of Intelligent Cockpit Based on AAOS    | Volvo        | Since 2023             | Porting head unit, infotainment features, AOSP... |                  |
+| 3         | Integrated Digital Cockpit for a Premium German OEM | BMW          | Since 2016             | Consolidating E/E architecture, software integ... |                  |
+| 4, 6, 8   | Android Automotive OS - Cybersecurity and Infotainment System | Bosch / Renault / FCA | Not explicitly stated | Infotainment support, Cybersecurity, Android A... |                  |
+| 5         | Partnership with Tier 1 - New Level of Ownership | PASA         | Over 15 years          | Strategic partnership, SW development, HMI, Do... | Peak team of 230+ FTE |
+| 7         | OEM - Connected Apps: Transforming Infotainment into Smartphone Experience | VW (Havai)    | 4+ years               | Connected apps, infotainment integration, serv... | Up to 100 FTE |
+| 9         | Trucks OEM                                       | Volvo Trucks |                         |                                                   |                  |
+| 10        | Automotive Audio Amplifier Tier-1               | Bose         |                         | Validation, design updates, DV testing, compl... |                  |
+| 11        | Connectivity and Infotainment                   | VW           |                         | End-to-end responsibility, connectivity, infota... |                  |
+
 # Reference 1. Android Automotive Infotainment Development - System and Apps
 
 **Timeline:** Since 2024 (Launch planned for 2025)
