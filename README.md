@@ -14,14 +14,20 @@ mkdir -p aaos-15 && cd aaos-15
 # Replace android-15.0.0_r1 with the exact release tag you want
 repo init -u https://android.googlesource.com/platform/manifest -b android-15.0.0_r1
 
+# OR GOOGLE OFFICIAL documentation 
+repo init --partial-clone --no-use-superproject -b android-latest-release -u https://android.googlesource.com/platform/manifest
+
 # --- Step 3: Sync all sources
 # -j$(nproc) uses all CPU cores for faster sync
 # -c ensures current branch only
 # --fetch-submodules pulls in any git submodules
 # --force-sync cleans up mismatches
-repo sync -j$(nproc) -c --fetch-submodules --force-sync
+# repo sync -j$(nproc) -c --fetch-submodules --force-sync
 # if you get the message "Resource has been exhausted (e.g. check quota)", you can reduce the number of jobs
-repo sync -j4 -c --fetch-submodules --force-sync
+# repo sync -j4 -c --fetch-submodules --force-sync
+
+# GOOGLE OFFICIAL documentation
+repo sync -c -j8
 
 # --- Step 4: Set up the build environment
 source build/envsetup.sh
