@@ -23,6 +23,10 @@ PATH=$PATH:~/bin
 # source the file
 source ~/.bashrc
 
+# Set Git variables
+git config --global user.email "gabriel.marchesan-almeida@capgemini.com"
+git config --global user.name "Gabriel Almeida" 
+
 # Initialize repo with Android 15 manifest
 # Replace android-15.0.0_r1 with the exact release tag you want
 repo init -u https://android.googlesource.com/platform/manifest -b android-15.0.0_r1
