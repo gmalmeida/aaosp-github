@@ -16,6 +16,13 @@ mkdir ~/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 
+# Add repo to your path
+vim ~/.bashrc
+# add to the end of the file
+PATH=$PATH:~/bin
+# source the file
+source ~/.bashrc
+
 # Initialize repo with Android 15 manifest
 # Replace android-15.0.0_r1 with the exact release tag you want
 repo init -u https://android.googlesource.com/platform/manifest -b android-15.0.0_r1
