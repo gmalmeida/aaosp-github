@@ -11,6 +11,8 @@ Source: https://source.android.com/docs/setup/download
 mkdir -p aaos-15 && cd aaos-15
 
 # Install repo tool
+sudo apt install curl
+mkdir ~/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 
