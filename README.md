@@ -6,11 +6,15 @@ Source: https://source.android.com/docs/setup/download
 # Introductions
 
 ```bash
-# --- Step 1: Create a fresh working directory
+# Create a fresh working directory
 # (Keeps AAOS sources separate from other AOSP checkouts)
 mkdir -p aaos-15 && cd aaos-15
 
-# --- Step 2: Initialize repo with Android 15 manifest
+# Install repo tool
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+chmod a+x ~/bin/repo
+
+# Initialize repo with Android 15 manifest
 # Replace android-15.0.0_r1 with the exact release tag you want
 repo init -u https://android.googlesource.com/platform/manifest -b android-15.0.0_r1
 
