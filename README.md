@@ -44,7 +44,7 @@ repo init --partial-clone --no-use-superproject -b android-latest-release -u htt
 # repo sync -j4 -c --fetch-submodules --force-sync
 
 # GOOGLE OFFICIAL documentation
-repo sync -c -j8
+repo sync -c -j8 --fail-fast
 
 # --- Step 4: Set up the build environment
 source build/envsetup.sh
