@@ -111,7 +111,7 @@ out/target/product/emulator_car64_x86_64/
 
 # How to install cuttlefish-common on Ubuntu
 sudo apt-get install git devscripts debhelper python3-all python3-venv \
-     libvirt-daemon-system libvirt-clients qemu-kvm virt-manager
+     libvirt-daemon-system libvirt-clients qemu-kvm virt-manager mesa-vulkan-drivers vulkan-tools libvulkan-dev
 
 cd ../
 sudo curl -fsSL https://us-apt.pkg.dev/doc/repo-signing-key.gpg \
