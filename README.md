@@ -134,3 +134,31 @@ stop_cvd
 
 
 ```
+# Installing VNC server on Ubuntu
+
+```console
+sudo apt update
+sudo apt install xfce4 xfce4-goodies
+
+# Install TigerVNC server
+sudo apt install tigervnc-standalone-server tigervnc-common
+
+# Start the VNC server
+vncserver
+
+# The first time, it will ask you to set a VNC password.
+# It will then start a VNC session (e.g., :1 → port 5901).
+
+# Configure VNC to use XFCE
+vim ~/.vnc/xstartup
+
+# Add
+#!/bin/sh
+exec startxfce4
+# Make it executable:
+chmod +x ~/.vnc/xstartup
+
+# VNC by default is not encrypted. Best practice is to tunnel through SSH:
+ssh -L 5901:localhost:5901 user@your-server-ip
+``` 
+#
