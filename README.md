@@ -109,56 +109,16 @@ m bootimage
 # Artifacts will appear under:
 out/target/product/vsoc_x86_64/
 
-# How to install cuttlefish-common on Ubuntu
-sudo apt-get install git devscripts debhelper python3-all python3-venv \
-     libvirt-daemon-system libvirt-clients qemu-kvm virt-manager mesa-vulkan-drivers vulkan-tools libvulkan-dev
-
-cd ../
-sudo curl -fsSL https://us-apt.pkg.dev/doc/repo-signing-key.gpg \
-    -o /etc/apt/trusted.gpg.d/artifact-registry.asc
-sudo chmod a+r /etc/apt/trusted.gpg.d/artifact-registry.asc
-echo "deb https://us-apt.pkg.dev/projects/android-cuttlefish-artifacts android-cuttlefish main" \
-    | sudo tee -a /etc/apt/sources.list.d/artifact-registry.list
-sudo apt update
-
-
-# Initialize the Cuttlefish environment (CVD - Cuttlefish Virtual Device)
-launch_cvd
-
-# Use ADB to connect to AAOS
-adb devices
-adb shell
-
-# Close the cuttlefish instance
-stop_cvd
-
-
 ```
-# Installing VNC server on Ubuntu
+# Running on Emulator
 
 ```console
+# Make sure you have Android Studio or at least the Android SDK tools installed:
 sudo apt update
-sudo apt install xfce4 xfce4-goodies
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
 
-# Install TigerVNC server
-sudo apt install tigervnc-standalone-server tigervnc-common
+# Ensure your user is in the kvm group:
+sudo adduser $USER kvm
 
-# Start the VNC server
-vncserver
-
-# The first time, it will ask you to set a VNC password.
-# It will then start a VNC session (e.g., :1 → port 5901).
-
-# Configure VNC to use XFCE
-vim ~/.vnc/xstartup
-
-# Add
-#!/bin/sh
-exec startxfce4
-# Make it executable:
-chmod +x ~/.vnc/xstartup
-
-# VNC by default is not encrypted. Best practice is to tunnel through SSH:
-ssh -L 5901:localhost:5901 user@your-server-ip
 ``` 
 #
