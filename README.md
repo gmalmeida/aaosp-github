@@ -109,6 +109,15 @@ m bootimage
 #Artifacts will appear under:
 out/target/product/emulator_car64_x86_64/
 
+# Initialize the Cuttlefish environment (CVD - Cuttlefish Virtual Device)
+launch_cvd
+
+# Use ADB to connect to AAOS
+adb devices
+adb shell
+
+# Close the cuttlefish instance
+stop_cvd
 
 
 ```
