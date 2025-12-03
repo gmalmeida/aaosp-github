@@ -79,7 +79,8 @@ source build/envsetup.sh
 
 export TARGET_RELEASE=trunk_stagin
 build_build_var_cache
-lunch
+lunch | grep auto
+
 # OR ALTERNATIVE
 # Example: build the x86_64 SDK car emulator image
 # lunch sdk_car_x86_64-trunk_staging-userdebug
