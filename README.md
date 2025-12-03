@@ -107,7 +107,7 @@ m vendorimage
 m bootimage
 
 # Artifacts will appear under:
-out/target/product/emulator_car64_x86_64/
+out/target/product/vsoc_x86_64/
 
 # How to install cuttlefish-common on Ubuntu
 sudo apt-get install git devscripts debhelper python3-all python3-venv \
