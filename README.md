@@ -11,8 +11,8 @@ Source: https://source.android.com/docs/setup/download
 sudo apt-get install git-core gnupg flex bison build-essential zip curl zlib1g-dev \
 gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev \
 libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig \
-python3 python-is-python3 openjdk-11-jdk openjdk-8-jdk
-
+python3 python-is-python3 openjdk-11-jdk openjdk-8-jdk qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools \
+                 libxcb-xinerama0 libxcb-xinerama0-dev qtwayland5
 # Create a fresh working directory
 # (Keeps AAOS sources separate from other AOSP checkouts)
 mkdir -p aaos-15 && cd aaos-15
