@@ -113,6 +113,7 @@ out/target/product/emulator_car64_x86_64/
 sudo apt-get install git devscripts debhelper python3-all python3-venv \
      libvirt-daemon-system libvirt-clients qemu-kvm virt-manager
 
+cd ../
 git clone https://github.com/google/android-cuttlefish.git
 cd android-cuttlefish
 debuild -i -us -uc -b
