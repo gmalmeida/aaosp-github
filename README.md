@@ -41,6 +41,10 @@ repo init -u https://android.googlesource.com/platform/manifest -b android-15.0.
 # OR GOOGLE OFFICIAL documentation 
 repo init --partial-clone --no-use-superproject -b android-latest-release -u https://android.googlesource.com/platform/manifest
 
+# If you want to make a clean repo sync
+repo forall -c "git reset --hard HEAD && git clean -fdx"
+repo sync -j$(nproc)
+
 # --- Step 3: Sync all sources
 # -j$(nproc) uses all CPU cores for faster sync
 # -c ensures current branch only
