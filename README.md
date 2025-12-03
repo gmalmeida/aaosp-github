@@ -109,6 +109,20 @@ m bootimage
 #Artifacts will appear under:
 out/target/product/emulator_car64_x86_64/
 
+# How to install cuttlefish-common on Ubuntu
+sudo apt-get install git devscripts debhelper python3-all python3-venv \
+     libvirt-daemon-system libvirt-clients qemu-kvm virt-manager
+
+git clone https://github.com/google/android-cuttlefish.git
+cd android-cuttlefish
+debuild -i -us -uc -b
+# This will create a .deb file in the parent directory, e.g. ../cuttlefish-common_<version>_amd64.deb.
+
+# Install the package
+sudo dpkg -i ../cuttlefish-common_*_amd64.deb
+sudo apt-get install -f   # fix dependencies if needed
+# A reboot ensures kernel modules and udev rules are applied.
+
 # Initialize the Cuttlefish environment (CVD - Cuttlefish Virtual Device)
 launch_cvd
 
