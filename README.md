@@ -77,7 +77,7 @@ source build/envsetup.sh
 # sdk_car_portrait_x86_64-trunk_staging-userdebug	x86_64	SDK build for portrait orientation; useful for vertical screen layouts (common in some EV dashboards)
 # sdk_car_x86_64-trunk_staging-userdebug	x86_64	Standard SDK build for x86_64; most common choice for emulator testing on desktop
 
-export TARGET_RELEASE=ap2a
+export TARGET_RELEASE=trunk_stagin
 build_build_var_cache
 lunch
 # OR ALTERNATIVE
