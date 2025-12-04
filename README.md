@@ -4,7 +4,7 @@ This repo intends to capture tips and tricks for building AAOS (vanila)
 Source: https://source.android.com/docs/setup/download
 
 # Docker Installation (recommended)
-```console
+```bash
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg lsb-release
 
