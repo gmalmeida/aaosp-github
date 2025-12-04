@@ -6,7 +6,19 @@ Source: https://source.android.com/docs/setup/download
 # Docker Installation (recommended)
 ```bash
 sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg lsb-release
+sudo apt-get install -y ca-certificates curl gnupg lsb-release -y unzip wget
+
+# Install Android SDK command-line tools
+ENV ANDROID_SDK_ROOT=/opt/android-sdk
+RUN mkdir -p $ANDROID_SDK_ROOT/cmdline-tools \
+    && cd $ANDROID_SDK_ROOT/cmdline-tools \
+    && wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O cmdline-tools.zip \
+    && unzip cmdline-tools.zip \
+    && rm cmdline-tools.zip \
+    && mv cmdline-tools latest
+
+# Add sdkmanager to PATH
+ENV PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
 
 # Add docker key
 sudo mkdir -p /etc/apt/keyrings
