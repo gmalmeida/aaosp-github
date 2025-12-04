@@ -35,7 +35,9 @@ newgrp docker
 
 # now you are ready to build and run
 docker build -t aosp-build .
-docker run -it --rm -v /path/do/seu/aosp:/home/builder/aosp aosp-build
+docker run -it --rm -v /path/do/seu/aosp:/home/builder/aosp --device /dev/kvm --group-add kvm aosp-build
+# docker run --rm -it --device /dev/kvm --group-add kvm ubuntu:22.04 bash
+
 
 # now let's navigate to the folder anb build AAOS
 cd aosp
