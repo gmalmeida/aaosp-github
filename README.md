@@ -33,11 +33,18 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
 
+# Running the Emulator
+# on the host
+xhost +local:docker
+
 # now you are ready to build and run
 # realpath ../aaos-14-qpr3-release
 # /home/gabriel/aaosp-github/aaos-14-qpr3-release
 docker build -t aosp-build .
-docker run -it --rm -v [/path/do/seu/aosp]:/home/builder/aosp --device /dev/kvm --group-add kvm aosp-build
+docker run -it --rm -v [/path/do/seu/aosp]:/home/builder/aosp --device /dev/kvm -e DISPLAY=$DISPLAY \
+           -v /tmp/.X11-unix:/tmp/.X11-unix \
+           --device /dev/dri \
+           --group-add kvm aosp-build
 # docker run --rm -it --device /dev/kvm --group-add kvm ubuntu:22.04 bash
 
 
