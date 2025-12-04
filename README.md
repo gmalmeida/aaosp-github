@@ -3,19 +3,88 @@ This repo intends to capture tips and tricks for building AAOS (vanila)
 
 Source: https://source.android.com/docs/setup/download
 
-# Introductions
+# Docker Installation (recommended)
+```
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg lsb-release
+
+# Add docker key
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+  sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# add docker repo
+echo \
+  "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# install docker engine
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+# test the installation 
+sudo docker run hello-world
+
+# if you want to run docker without sudo 
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+
+# now you are ready to build and run
+docker build -t aosp-build .
+docker run -it --rm -v /path/do/seu/aosp:/home/builder/aosp aosp-build
+
+# now let's navigate to the folder anb build AAOS
+cd aosp
+source build/envsetup.sh
+lunch aosp_cf_x86_64_auto-ap2a-eng
+make -j$(nproc)
+```
+
+# The following instructions are for native compilation 
 
 ```bash
-# --- Step 1: Create a fresh working directory
+
+# Install essential packages
+sudo apt-get install git-core gnupg flex bison build-essential zip curl zlib1g-dev \
+gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev \
+libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig \
+python3 python-is-python3 openjdk-11-jdk openjdk-8-jdk qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools \
+                 libxcb-xinerama0 libxcb-xinerama0-dev qtwayland5
+# Create a fresh working directory
 # (Keeps AAOS sources separate from other AOSP checkouts)
 mkdir -p aaos-15 && cd aaos-15
 
-# --- Step 2: Initialize repo with Android 15 manifest
+# Install repo tool
+sudo apt install curl
+mkdir ~/bin
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+chmod a+x ~/bin/repo
+
+# Add repo to your path
+vim ~/.bashrc
+# add to the end of the file
+PATH=$PATH:~/bin
+# source the file
+source ~/.bashrc
+
+# Set Git variables
+git config --global user.email "gabriel.marchesan-almeida@capgemini.com"
+git config --global user.name "Gabriel Almeida" 
+
+# Initialize repo with Android 15 manifest
 # Replace android-15.0.0_r1 with the exact release tag you want
 repo init -u https://android.googlesource.com/platform/manifest -b android-15.0.0_r1
 
 # OR GOOGLE OFFICIAL documentation 
 repo init --partial-clone --no-use-superproject -b android-latest-release -u https://android.googlesource.com/platform/manifest
+
+# If you want to make a clean repo sync
+repo forall -c "git reset --hard HEAD && git clean -fdx"
+repo sync -j$(nproc)
 
 # --- Step 3: Sync all sources
 # -j$(nproc) uses all CPU cores for faster sync
@@ -27,7 +96,7 @@ repo init --partial-clone --no-use-superproject -b android-latest-release -u htt
 # repo sync -j4 -c --fetch-submodules --force-sync
 
 # GOOGLE OFFICIAL documentation
-repo sync -c -j8
+repo sync -c -j8 --fail-fast
 
 # --- Step 4: Set up the build environment
 source build/envsetup.sh
@@ -49,9 +118,10 @@ source build/envsetup.sh
 # sdk_car_portrait_x86_64-trunk_staging-userdebug	x86_64	SDK build for portrait orientation; useful for vertical screen layouts (common in some EV dashboards)
 # sdk_car_x86_64-trunk_staging-userdebug	x86_64	Standard SDK build for x86_64; most common choice for emulator testing on desktop
 
-export TARGET_RELEASE=ap2a
+export TARGET_RELEASE=trunk_stagin
 build_build_var_cache
-lunch
+lunch | grep auto
+
 # OR ALTERNATIVE
 # Example: build the x86_64 SDK car emulator image
 # lunch sdk_car_x86_64-trunk_staging-userdebug
@@ -77,9 +147,19 @@ m systemimage
 m vendorimage
 m bootimage
 
-#Artifacts will appear under:
-out/target/product/emulator_car64_x86_64/
-
-
+# Artifacts will appear under:
+out/target/product/vsoc_x86_64/
 
 ```
+# Running on Emulator
+
+```console
+# Make sure you have Android Studio or at least the Android SDK tools installed:
+sudo apt update
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
+
+# Ensure your user is in the kvm group:
+sudo adduser $USER kvm
+
+``` 
+#
