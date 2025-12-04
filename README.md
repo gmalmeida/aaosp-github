@@ -3,6 +3,48 @@ This repo intends to capture tips and tricks for building AAOS (vanila)
 
 Source: https://source.android.com/docs/setup/download
 
+# Docker Installation (recommended)
+```
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg lsb-release
+
+# Add docker key
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+  sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# add docker repo
+echo \
+  "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# install docker engine
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+# test the installation 
+sudo docker run hello-world
+
+# if you want to run docker without sudo 
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+
+# now you are ready to build and run
+docker build -t aosp-build .
+docker run -it --rm -v /path/do/seu/aosp:/home/builder/aosp aosp-build
+
+# now let's navigate to the folder anb build AAOS
+cd aosp
+source build/envsetup.sh
+lunch aosp_cf_x86_64_auto_ap2a-eng
+make -j$(nproc)
+```
+
+``` 
 # Introductions
 
 ```bash
