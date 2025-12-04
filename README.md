@@ -52,8 +52,10 @@ docker run -it --rm \
     -v /usr/share/zoneinfo:/usr/share/zoneinfo:ro \
     -v $XDG_RUNTIME_DIR/pulse:/run/user/1000/pulse \
     -e PULSE_SERVER=unix:/run/user/1000/pulse/native \
+    -e XDG_RUNTIME_DIR=/home/builder/.android \
     -p 5037:5037 \
     aosp-build
+
 # docker run --rm -it --device /dev/kvm --group-add kvm ubuntu:22.04 bash
 
 
