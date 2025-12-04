@@ -40,7 +40,7 @@ docker run -it --rm -v /path/do/seu/aosp:/home/builder/aosp aosp-build
 # now let's navigate to the folder anb build AAOS
 cd aosp
 source build/envsetup.sh
-lunch aosp_cf_x86_64_auto_ap2a-eng
+lunch aosp_cf_x86_64_auto-ap2a-eng
 make -j$(nproc)
 ```
 
