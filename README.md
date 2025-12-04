@@ -41,10 +41,19 @@ xhost +local:docker
 # realpath ../aaos-14-qpr3-release
 # /home/gabriel/aaosp-github/aaos-14-qpr3-release
 docker build -t aosp-build .
-docker run -it --rm -v [/path/do/seu/aosp]:/home/builder/aosp --device /dev/kvm -e DISPLAY=$DISPLAY \
-           -v /tmp/.X11-unix:/tmp/.X11-unix \
-           --device /dev/dri \
-           --group-add kvm aosp-build
+docker run -it --rm \
+    -v /home/gabriel/aaosp-github/aaos-14-qpr3-release:/home/builder/aosp \
+    --device /dev/kvm \
+    --device /dev/dri \
+    --group-add kvm \
+    -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /usr/share/zoneinfo:/usr/share/zoneinfo:ro \
+    -v $XDG_RUNTIME_DIR/pulse:/run/user/1000/pulse \
+    -e PULSE_SERVER=unix:/run/user/1000/pulse/native \
+    -p 5037:5037 \
+    aosp-build
 # docker run --rm -it --device /dev/kvm --group-add kvm ubuntu:22.04 bash
 
 
