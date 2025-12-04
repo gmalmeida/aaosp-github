@@ -43,6 +43,7 @@ xhost +local:docker
 docker build -t aosp-build .
 docker run -it --rm \
     -v /home/gabriel/aaosp-github/aaos-14-qpr3-release:/home/builder/aosp \
+    -v /home/gabriel/.android:/home/builder/.android \
     --device /dev/kvm \
     --device /dev/dri \
     --group-add kvm \
@@ -57,6 +58,12 @@ docker run -it --rm \
     aosp-build
 
 # docker run --rm -it --device /dev/kvm --group-add kvm ubuntu:22.04 bash
+
+# Container runtime: After starting the container, create the AVD interactively:
+avdmanager create avd -n test_avd \
+  -k "system-images;android-34;google_apis;x86_64"
+
+# Persist AVDs: Mount a host volume for /home/builder/.android/avd so your AVDs survive container restarts:
 
 
 # now let's navigate to the folder anb build AAOS
