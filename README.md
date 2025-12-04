@@ -44,6 +44,8 @@ lunch aosp_cf_x86_64_auto-ap2a-eng
 make -j$(nproc)
 ```
 
+# The following instructions are for native compilation 
+
 ``` 
 # Introductions
 
