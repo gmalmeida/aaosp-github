@@ -46,9 +46,6 @@ make -j$(nproc)
 
 # The following instructions are for native compilation 
 
-``` 
-# Introductions
-
 ```bash
 
 # Install essential packages
