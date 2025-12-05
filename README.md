@@ -1,3 +1,6 @@
+# Cuttlefish
+cd ~/aaosp-github/aaos-14-qpr3-release && source build/envsetup.sh && lunch aosp_cf_x86_64_phone-userdebug && export PATH=out/host/linux-x86/bin:$PATH && which extract-ikconfig && launch_cvd --daemon --memory_mb=12288 --cpus=8 -report_anonymous_usage_stats=n
+
 # General 
 This repo intends to capture tips and tricks for building AAOS (vanila) 
 
