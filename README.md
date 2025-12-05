@@ -4,9 +4,9 @@ This repo intends to capture tips and tricks for building AAOS (vanila)
 Source: https://source.android.com/docs/setup/download
 
 # Docker Installation (recommended)
-```
+```bash
 sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg lsb-release
+sudo apt-get install -y ca-certificates curl gnupg lsb-release 
 
 # Add docker key
 sudo mkdir -p /etc/apt/keyrings
@@ -33,9 +33,38 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
 
+# Running the Emulator
+# on the host
+xhost +local:docker
+
 # now you are ready to build and run
+# realpath ../aaos-14-qpr3-release
+# /home/gabriel/aaosp-github/aaos-14-qpr3-release
 docker build -t aosp-build .
-docker run -it --rm -v /path/do/seu/aosp:/home/builder/aosp aosp-build
+docker run -it --rm \
+    -v /home/gabriel/aaosp-github/aaos-14-qpr3-release:/home/builder/aosp \
+    -v /home/gabriel/.android:/home/builder/.android \
+    --device /dev/kvm \
+    --device /dev/dri \
+    --group-add kvm \
+    -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /usr/share/zoneinfo:/usr/share/zoneinfo:ro \
+    -v $XDG_RUNTIME_DIR/pulse:/run/user/1000/pulse \
+    -e PULSE_SERVER=unix:/run/user/1000/pulse/native \
+    -e XDG_RUNTIME_DIR=/home/builder/.android \
+    -p 5037:5037 \
+    aosp-build
+
+# docker run --rm -it --device /dev/kvm --group-add kvm ubuntu:22.04 bash
+
+# Container runtime: After starting the container, create the AVD interactively:
+avdmanager create avd -n test_avd \
+  -k "system-images;android-34;google_apis;x86_64"
+
+# Persist AVDs: Mount a host volume for /home/builder/.android/avd so your AVDs survive container restarts:
+
 
 # now let's navigate to the folder anb build AAOS
 cd aosp
