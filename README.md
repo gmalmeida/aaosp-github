@@ -1,5 +1,5 @@
 # Cuttlefish
-```
+```bash
 # Set env. variables
 ANDROID_LUNCH_TARGET=aosp_cf_x86_64_auto-ap2a-eng
 ANDROID_BUILD_HOME=/home/gabriel/aaosp-github/aaos-14-qpr3-release
