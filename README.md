@@ -9,7 +9,9 @@ ANDROID_HOST_OUT=$ANDROID_BUILD_OUT/host/linux-x86
 PATH=$ANDROID_HOST_OUT/bin:$PATH 
 
 # Running Cuttlefish
-cd ~/aaosp-github/aaos-14-qpr3-release && source build/envsetup.sh && lunch $ANDROID_LUNCH_TARGET && export PATH=out/host/linux-x86/bin:$PATH && which extract-ikconfig && launch_cvd --daemon --memory_mb=12288 --cpus=8 -report_anonymous_usage_stats=n
+cd ~/aaosp-github/aaos-14-qpr3-release && source build/envsetup.sh && \
+ lunch $ANDROID_LUNCH_TARGET && export PATH=out/host/linux-x86/bin:$PATH && \
+which extract-ikconfig && launch_cvd --daemon --memory_mb=12288 --cpus=8 -report_anonymous_usage_stats=n
 ``` 
 # General 
 This repo intends to capture tips and tricks for building AAOS (vanila) 
