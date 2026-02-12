@@ -31,4 +31,7 @@ Goal: Become a freelance consultant for OEMs and Tier-1 suppliers building next-
 ## Current Status
 - Week: 1
 - Topic: AAOS Platform Build & Upgrades
-- Phase: Initial setup
+- Phase: Day 0 complete, Day 1 starts Feb 13
+- Repo sync: AAOS 14 syncing in tmux session `aaos-sync` (check `source/sync.log`)
+- VNC: TigerVNC on :1 (port 5901), XFCE, 1920x1080
+- Remote access: SSH from Mac laptop, LAN IP 192.168.2.201

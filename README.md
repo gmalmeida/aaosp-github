@@ -17,8 +17,41 @@ claude --continue
 
 - **Week**: 1 of 4
 - **Topic**: AAOS Platform Build & Upgrades
-- **Phase**: Initial setup
-- **Progress**: Repo structure created, agents configured
+- **Phase**: Day 0 (prep) complete — Day 1 starts tomorrow
+- **Course Plan**: [`courses/week1-aaos-platform-build-upgrades.md`](courses/week1-aaos-platform-build-upgrades.md)
+
+### What was completed today (Day 0 — Feb 12, 2026)
+- Repo structure created: `agents/`, `scripts/`, `courses/`, `docs/`, `source/`
+- 6 custom agents configured: daily-review, git-sync, course-planner, aaos-mentor, upgrade-diff, token-guard
+- `CLAUDE.md` created for persistent Claude Code context
+- `course.config` created with 4-week training plan
+- Build dependencies installed via `setup-deps.sh` (openjdk-17, repo tool, build-essential, etc.)
+- AAOS 14 `repo init` completed; `repo sync` running in tmux session `aaos-sync`
+- Full Week 1 course plan generated (5 days, 40 hours)
+- VNC server configured for remote graphical access (port 5901, XFCE desktop)
+- Build/emulator/upgrade scripts created and made executable
+
+### What to do tomorrow (Day 1)
+
+1. **Check repo sync status**:
+   ```bash
+   tmux attach -t aaos-sync
+   # or
+   tail -20 ~/aaosp-github/source/sync.log
+   ```
+2. **If sync complete**, start the build:
+   ```bash
+   ./scripts/build.sh
+   ```
+3. **If sync still running**, start with Day 1 morning theory tasks (see course plan)
+4. **Connect graphically from Mac** (for emulator later):
+   ```bash
+   # On Mac terminal:
+   ssh -L 5901:localhost:5901 gabriel@192.168.2.201
+   # Then in another Mac terminal:
+   open vnc://localhost:5901
+   ```
+5. Follow the detailed Day 1 plan in [`courses/week1-aaos-platform-build-upgrades.md`](courses/week1-aaos-platform-build-upgrades.md)
 
 ## 4-Week Training Plan
 
@@ -31,78 +64,76 @@ claude --continue
 
 ## Week 1 Plan: AAOS Platform Build & Upgrades
 
-### Day 1: Setup & First Build
-- Install dependencies: `sudo ./scripts/setup-deps.sh`
-- Initialize AAOS source: `repo init` + `repo sync` in `source/`
-- Build car emulator image: `./scripts/build.sh`
-- Boot emulator: `./scripts/emulator.sh`
-- Explore the running system via `adb shell`
+| Day | Focus | Key Deliverable |
+|-----|-------|----------------|
+| Day 1 | Environment Setup & First Build | Emulator booting, `adb shell` access |
+| Day 2 | Platform Architecture Deep Dive | CarService + VHAL property tracing |
+| Day 3 | Modify Services & Build Apps | Custom logging in CarService, first Car app |
+| Day 4 | AAOS 14→15 Upgrade Analysis | Migration checklist for OEM consulting |
+| Day 5 | Capstone & Consolidation | End-to-end custom VHAL property + app |
 
-### Day 2: Platform Architecture
-- Study AAOS architecture: CarService, VHAL, Car SystemUI
-- Explore `packages/services/Car/` source code
-- Understand the AAOS-specific HAL interfaces
-- Hands-on: trace a VHAL property from app to HAL
+Full details: [`courses/week1-aaos-platform-build-upgrades.md`](courses/week1-aaos-platform-build-upgrades.md)
 
-### Day 3: Modify System Services
-- Modify CarService to add custom logging
-- Build and push changes to emulator
-- Understand the Car API surface (`android.car.*`)
-- Hands-on: create a simple Car app using Car API
+## Remote Access Setup
 
-### Day 4: AAOS 14 to 15 Upgrade Analysis
-- Run `./scripts/upgrade-test.sh` to understand scope
-- Use `/agents upgrade-diff aaos14 aaos15` for detailed analysis
-- Study breaking changes in VHAL, CarService, permissions
-- Document migration checklist
+This machine (`android` / `192.168.2.201`) is accessed via SSH from a Mac laptop.
 
-### Day 5: Consolidation & Capstone
-- Build a mini-project: custom VHAL property + test app
-- Review and update all documentation
-- Run `/agents daily-review` and `/agents git-sync`
-- Plan Week 2 topics
+### VNC (for emulator & GUI apps)
+```bash
+# On Mac: create SSH tunnel + connect
+ssh -L 5901:localhost:5901 gabriel@192.168.2.201
+open vnc://localhost:5901    # built-in Mac VNC viewer
+```
+- VNC server: TigerVNC on `:1` (port 5901), XFCE desktop, 1920x1080
+- Start VNC if not running: `vncserver :1 -geometry 1920x1080 -depth 24 -localhost no`
+
+### X11 Forwarding (for single GUI apps)
+```bash
+# On Mac (requires XQuartz: brew install --cask xquartz):
+ssh -X gabriel@192.168.2.201
+```
 
 ## Repo Structure
 
 ```
 aaosp-github/
-  CLAUDE.md        # Persistent context for Claude Code
-  course.config    # Training configuration (edit to change topics)
-  README.md        # This file - daily progress & instructions
-  agents/          # Custom sub-agents (auto-discovered)
-    daily-review.md
-    git-sync.md
-    course-planner.md
-    aaos-mentor.md
-    upgrade-diff.md
-    token-guard.md
-  scripts/         # Automation scripts
-    setup-deps.sh  # Install build dependencies
-    build.sh       # Build AAOS image
-    emulator.sh    # Launch emulator
-    upgrade-test.sh
-  source/          # AAOS/AOSP source code (after repo sync)
-  docs/            # Documentation and notes
-  courses/         # Generated course plans per topic
+  CLAUDE.md          # Persistent context (Claude Code reads automatically)
+  course.config      # Training config (edit to change topics)
+  README.md          # This file — progress tracker & daily instructions
+  agents/            # Custom sub-agents (auto-discovered)
+    daily-review.md  # Rewrites README, summarizes progress, plans tomorrow
+    git-sync.md      # Auto-commits and pushes to GitHub
+    course-planner.md # Generates 1-week learning plans from course.config
+    aaos-mentor.md   # AAOS expert Q&A
+    upgrade-diff.md  # Version migration analysis & checklists
+    token-guard.md   # Token usage optimization
+  scripts/           # Automation scripts
+    setup-deps.sh    # Install AAOS build dependencies
+    build.sh         # Build AAOS image
+    emulator.sh      # Launch car emulator
+    upgrade-test.sh  # Version upgrade testing
+  source/            # AAOS/AOSP source (repo sync, git-ignored)
+  docs/              # Documentation, notes, and reference material
+  courses/           # Generated course plans per topic
 ```
 
 ## Daily Workflow
 
 1. `cd ~/aaosp-github && claude --continue`
 2. Work on today's tasks, use agents as needed:
-   - `/agents aaos-mentor "how does VHAL work?"`
-   - `/agents course-planner --update`
+   - `aaos-mentor "how does VHAL work?"`
+   - `course-planner --update`
 3. End of day:
-   - `/agents daily-review` - rewrites README with progress
-   - `/agents git-sync` - commits and pushes to GitHub
+   - `daily-review` — rewrites README with progress
+   - `git-sync` — commits and pushes to GitHub
 
 ## Changing Topics
 
 To switch to a new topic (e.g., after Week 1):
 
 1. Edit `course.config`: set `current_topic` and `current_week`
-2. Run `/agents course-planner --update` to generate the new week's plan
-3. The system adapts automatically - all agents are course-agnostic
+2. Run `course-planner --update` to generate the new week's plan
+3. The system adapts automatically — all agents are course-agnostic
 
 ## IDE Setup
 
@@ -116,6 +147,8 @@ To switch to a new topic (e.g., after Week 1):
 ## Key Learnings
 
 _Updated daily by the daily-review agent._
+
+- **Day 0**: Project bootstrapped. AAOS 14 source syncing. All tooling and agents in place.
 
 ---
 *Powered by Claude Code with persistent agents and GitHub sync.*
