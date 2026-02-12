@@ -1,0 +1,165 @@
+now assume that I am going to use this prompt
+with Claude CLI - I want to work in a directory
+aaos where Claude remembers always the last
+status - so that I will version it on GitHub and can
+use in different machines. Whenever I use a new
+laptop, Claude will remember the context of all
+questions/ answers from previous interactions
+and will save tokens from it. If I well remember, I
+can use something like 'Claude init' command to
+setup this environment. Also create an agent that
+will be called whenever I want to finish my daily
+studies - this agent will take care of reviewing
+README.md file containing all instructions
+(learning information) and will rewrite to better
+reusability and easy understanding of the
+instructions in following days. Besides that, there
+will be another agent in charge of committing the
+latest code and pushing it to my GitHub repository.
+Additionally, I want the prompt to create other agents that will make my work very efficient and
+productive, always saving tokens to not become too expensive. All these agents should be
+course agnostic, in other words, I should be able to create any course learning path by simply
+providing a topic in a configuration file (course.config), which will be used for the training - e.g. If
+after learning the AAOS I want to focus on Figma, then I would just manually update
+course.config with Topic2=Figma and run an agent to prepare a full course for me on The topic.
+Each course should not take longer than 1 week to complete (considering 8h a day) -
+After one month of training, I want to be able to cover 4 topics within this industry to have a
+more in depth understanding of the engineering behind so I can better understand the efforts
+required to deliver any Infotainment project based on android for any OEM or Tier-1 supplier. My
+idea is to act as a freelancer consultant to support OEMs and Tier-1 suppliers building the next-
+generation infotainment system.
+Here is your enhanced prompt specifically optimized for Claude CLI / Claude Code. It
+incorporates persistent context via ~/aaos/ repo, CLAUDE.md for memory, custom
+sub‑agents (which Claude Code natively supports via ./agents/ and ~/.claude/agents/), GitHub
+integration, course.config, and token‑efficient workflows. [1] [2] [3] [4] [5]
+This prompt will have Claude CLI create the full self‑contained system in ~/aaos/, which you git
+init, push to GitHub, and clone anywhere.
+
+Prompt for Claude CLI: Setup my AAOS Learning Lab with persistent agents + GitHub sync
+You are an expert Claude Code CLI engineer building a persistent, token‑efficient learning lab
+for me in ~/aaos/ directory. This will be my always‑on AAOS dev environment that remembers
+everything across machines via GitHub.
+
+Core Requirements
+ 1. Initialize the ~/aaos/ repo structure (do this first if not exists):
+      mkdir -p ~/aaos/{source,docs,agents,scripts,courses}
+      cd ~/aaos
+      git init
+
+
+        Create CLAUDE.md (persistent project context Claude Code automatically reads). [2] [4]
+        Create course.config (YAML/JSON):
+              current_topic: "AAOS Platform Build & Upgrades"
+              topics:
+                - topic1: "AAOS Platform Build & Upgrades" # week 1
+                - topic2: "Figma → AAOS HMI/UX"              # week 2
+                - topic3: "AAOS Cloud/Connectivity"         # week 3
+                - topic4: "AAOS OTA & Security"             # week 4
+              weekly_hours: 40 # 8h/day x 5
+
+
+        Commit everything to main and set up GitHub remote (ask me for repo name if needed).
+        [1]
+
+ 2. Day‑1 AAOS build setup (Linux desktop, hands‑on from hour 1):
+        Step‑by‑step commands to install deps, repo sync AAOS 14/15, build car emulator
+        image, boot it. [6] [7] [8]
+        Store AAOS source in ~/aaos/source/ and build artifacts in ~/aaos/source/out/.
+        Create scripts in ~/aaos/scripts/ for common tasks: build.sh, emulator.sh, upgrade-
+        test.sh.
+
+ 3. Custom Sub‑Agents system (create in ./agents/ and ~/.claude/agents/):
+    Claude Code will auto‑discover and use these via /agents slash commands. Make them
+    token‑efficient (scoped context, summaries). [3] [5]
+    Required agents (create YAML/MD files for each):
+        daily-review: Reviews ~/aaos/README.md, rewrites it for clarity/reusability, summarizes
+        today's progress, plans tomorrow. Trigger: claude /agents daily-review.
+       git-sync: Commits changes (git add . && git commit -m "Daily progress:
+       [auto‑summary]" && git push), creates PRs if needed. Trigger: claude /agents git-sync.
+
+       course-planner: Reads course.config, generates/refines 1‑week plan (40h) for current
+       topic with daily tasks, resources, hands‑on exercises. Trigger: claude /agents course-
+       planner --update.
+
+       aaos-mentor: Core AAOS expert for builds, upgrades, changes (e.g., "explain VHAL
+       change in AAOS 15"). Scoped to ~/aaos/source/.
+       upgrade-diff: Analyzes diffs between AAOS versions, generates checklists/migrations.
+
+       token-guard: Monitors session token use, suggests summaries, prunes context if >80%
+       limit.
+   Make agents course‑agnostic: Use course.config current_topic to specialize (e.g., for
+   "Figma": generate Figma‑to‑code workflows). New topic = edit config + course-planner --
+   update. [5] [3]
+
+ 4. Persistent memory & token efficiency:
+       Use CLAUDE.md + ./agents/*.md for context (Claude Code reads automatically). [4] [2]
+       Session persistence: Use claude --continue / --resume in ~/aaos/. Hidden .claude/ dir
+       for history. [9] [10]
+       Daily ritual: claude /agents daily-review → claude /agents git-sync. Saves full context
+       to GitHub.
+       On new machine: git clone <github> ~/aaos && cd ~/aaos && claude --continue
+       (inherits everything). [1]
+ 5. Hands‑on 1‑week AAOS plan (update README.md):
+       Day 1: Build + emulator.
+       Days 2–3: Modify services/HMI.
+       Days 4–5: Simulate AAOS 14→15 upgrade.
+       Use agents throughout (e.g., /agents aaos-mentor "add logging to CarService"). [11] [12]
+ 6. IDE Integration:
+       Recommend VS Code + Claude Code extension (industry standard for AAOS/AOSP
+       work: fast, Git‑native, terminal‑heavy). [13] [14] [15]
+       Steps: Install VS Code, Claude Code extension, open ~/aaos/, use integrated terminal
+       for claude commands.
+       Fallback: Android Studio for emulator/app debugging.
+
+Output Format
+
+ ## 🚀 QUICK START (copy‑paste these 5 commands)
+ $ mkdir -p ~/aaos && cd ~/aaos
+ $ [commands...]
+
+ ## 📁 Repo Structure
+Then sections for: Setup, Agents (with trigger commands), Daily Workflow, Week 1 Plan, Token
+Tips.
+Generate all files/scripts/agents now and show exact contents. End with: "Run claude /agents
+git-sync to push to GitHub."
+
+
+Paste this exactly into Claude CLI in a fresh ~/aaos/ dir (or let it create it). It will bootstrap
+everything: files, agents, GitHub setup, and your first AAOS build plan.
+After setup, your daily flow:
+ 1. cd ~/aaos && claude --continue
+ 2. Work + /agents aaos-mentor etc.
+ 3. End day: /agents daily-review → /agents git-sync
+For new topics: Edit course.config, /agents course-planner --update, repeat.
+This covers your 4 topics in 1 month and positions you perfectly as an infotainment consultant.
+Ready to run it—what's your GitHub repo name for ~/aaos/?
+                                                    ⁂
+
+  1. https://github.com/AnandChowdhary/continuous-claude
+  2. https://github.com/Cranot/claude-code-guide
+  3. https://dev.to/therealmrmumba/claude-codes-custom-agent-framework-changes-everything-4o4m
+  4. https://www.cometapi.com/managing-claude-codes-context/
+  5. https://code.claude.com/docs/en/sub-agents
+  6. https://dev.to/hpnightowl/building-android-automotive-os-a-beginner-friendly-guide-4f67
+  7. https://stackoverflow.com/questions/58822494/how-to-build-aosp-for-android-automotive-os
+  8. https://grapeup.com/blog/android-automotive-os-14-is-out-build-your-own-emulator-from-scratch
+  9. https://github.com/anthropics/claude-code/issues/1741
+ 10. https://www.reddit.com/r/ClaudeAI/comments/1l5psii/preserving_context_with_claude_code_in_your_id
+     e/
+ 11. https://proandroiddev.com/mastering-android-automotive-os-architecture-expert-guide-33b7fa73bf8
+     c
+ 12. https://ignitarium.com/navigating-over-the-air-updates-on-android-automotive-os/
+ 13. https://claudefa.st/blog/tools/extensions/claude-code-vscode
+ 14. https://www.youtube.com/watch?v=0FmT0uasKWw
+ 15. https://www.youtube.com/watch?v=YjW8K-bBcZY
+ 16. https://github.com/czottmann/render-claude-context
+ 17. https://github.com/anthropics/claude-code/issues/12646
+ 18. https://www.youtube.com/watch?v=-zzbkh9B-5Q
+ 19. https://www.youtube.com/watch?v=RroZP4vcJnc
+20. https://www.reddit.com/r/ClaudeCode/comments/1q9c1pc/how_to_keep_claude_code_always_in_contex
+    t_across/
+21. https://code.claude.com/docs/en/cli-reference
+22. https://www.reddit.com/r/ClaudeAI/comments/1lqn9ie/my_current_claude_code_sub_agents_workflow/
+23. https://www.reddit.com/r/ClaudeAI/comments/1pcylc9/i_built_an_opensource_tool_to_stop_claude_cod
+    e/
+
